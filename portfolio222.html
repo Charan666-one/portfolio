@@ -290,24 +290,31 @@ nav.s { background:rgba(7,8,13,.75); border-color:var(--border); backdrop-filter
 /* Tech scroll marquee */
 .marquee-wrap {
   position: absolute;
-  bottom: 0;
+  bottom:  -2.5rem;
   left: 0;
   right: 0;
-  border-top: 1px solid var(--border);
+  width: 100vw;
+  margin-left: calc(-5vw);
+  border-top: 1px solid rgba(61,255,160,.15);
+  border-bottom: 1px solid rgba(61,255,160,.08);
   overflow: hidden;
-  padding: .85rem 0;
-  background: linear-gradient(to right, var(--bg) 0%, transparent 8%, transparent 92%, var(--bg) 100%);
+  padding: 1.4rem 0;
+  background: rgba(7,8,13,.85);
+  backdrop-filter: blur(12px);
   opacity: 0;
   animation: fup .8s 1.3s forwards;
-  z-index: 2;
+  z-index: 10;
 }
 .marquee-track {
   display:flex; gap:3rem; width:max-content;
   animation:marquee 28s linear infinite;
 }
 .marquee-track span {
-  font-family:var(--font-m); font-size:.72rem; color:var(--text2);
-  letter-spacing:.06em; white-space:nowrap;
+  font-family: var(--font-m);
+  font-size: 1rem;
+  color: var(--text2);
+  letter-spacing: .08em;
+  white-space: nowrap;
 }
 .marquee-track span b { color:var(--green); font-weight:400; }
 @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
