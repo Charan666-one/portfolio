@@ -95,8 +95,8 @@
 
       <div class="hero-stats">
         <div class="stat"><div class="num">8.45</div><div class="lbl">CGPA</div></div>
-        <div class="stat"><div class="num">10</div><div class="lbl">Projects</div></div>
-        <div class="stat"><div class="num">4</div><div class="lbl">Hackathons</div></div>
+        <div class="stat"><div class="num">11</div><div class="lbl">Projects</div></div>
+        <div class="stat"><div class="num">5</div><div class="lbl">Hackathons</div></div>
         <div class="stat"><div class="num">2028</div><div class="lbl">Graduating</div></div>
       </div>
     </div>
@@ -207,10 +207,69 @@
     <p class="label muted rv" style="margin-bottom:0">Flagship work</p>
     <div class="index" id="flagship">
 
-      <!-- 001 CODELENS -->
+      <!-- 001 REDBLUE / BLACKBOX -->
+      <article class="entry rv" data-flag="flagship" data-status="progress" data-cat="ai systems fullstack">
+        <button class="entry-head" aria-expanded="false" aria-controls="d-redblue">
+          <span class="entry-num">001</span>
+          <span class="entry-main">
+            <span class="entry-title">RedBlue <span class="muted" style="font-weight:400">/ BLACKBOX</span></span>
+            <span class="entry-pos">A security layer for AI agents that doesn't trust the model — it proves the fix by attacking itself again.</span>
+            <span class="entry-tech">Python · FastAPI · NetworkX · Pydantic · SQLite · React · TypeScript · Featherless (OpenAI-compatible)</span>
+          </span>
+          <span class="entry-right">
+            <span class="status progress"><span class="sd" aria-hidden="true"></span>In progress</span>
+            <span class="entry-arrow" aria-hidden="true">→</span>
+          </span>
+        </button>
+        <div class="entry-detail" id="d-redblue"><div class="detail-inner"><div class="detail-body">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-block"><span class="k">The problem</span><p>Give an AI agent tools — a CRM, an inbox, a database — then feed it untrusted content, and a malicious document can hijack its decision-making. This is indirect prompt injection (OWASP&nbsp;LLM01). Conventional security can't see it, because nothing is technically "hacked": the agent simply decides to do harm using access it legitimately has.</p></div>
+              <div class="detail-block"><span class="k">The approach</span><p>The governing rule is <strong style="color:var(--ink)">the LLM is never the security authority</strong>. A deterministic engine establishes every security fact — execution graph, detection, reachability, blast radius, defense selection, verification. The LLM only writes the human explanation, and its output is provenance-checked: any event ID it references that doesn't exist in the supplied evidence is rejected outright, and the system falls back to a deterministic report rather than trusting it.</p></div>
+              <div class="detail-block"><span class="k">Key decision</span><p>A defense isn't trusted because it sounds right — it's trusted because it was <em>re-tested</em>. After choosing the cheapest intervention that provably severs the attack path (blocking one destination, not killing the agent), the system replays the identical attack against a live target agent with runtime enforcement active, and only reports success if the path is genuinely blocked.</p></div>
+            </div>
+            <div>
+              <div class="arch">
+                <div class="arch-h">Deterministic pipeline</div>
+                <div class="flow">
+                  <b>Events</b><span class="fa">→</span><b>Graph</b><span class="fa">→</span><b>Detect</b><span class="fa">→</span><b>Blast radius</b><span class="fa">→</span><b>What-if</b><span class="fa">→</span><b>Defend</b><span class="fa">→</span><b>Re-attack</b><span class="fa">→</span><b>Verify</b>
+                </div>
+              </div>
+              <div class="ledger" style="margin-top:1.3rem">
+                <div class="lg-h built">What I actually built</div>
+                <ul>
+                  <li class="done"><span class="m">✓</span>Deterministic execution graph over agent events — lineage from causal parent links, never timestamps</li>
+                  <li class="done"><span class="m">✓</span>Reachability &amp; blast-radius analysis: what a compromised agent can actually touch</li>
+                  <li class="done"><span class="m">✓</span>Counterfactual what-if engine that re-runs the real detection stack per candidate defense</li>
+                  <li class="done"><span class="m">✓</span>Minimum-effective intervention selection — cheapest defense that provably severs the path</li>
+                  <li class="done"><span class="m">✓</span>Self-verifying defense: controlled re-attack against a live target agent with runtime enforcement</li>
+                  <li class="done"><span class="m">✓</span>LLM investigation layer with schema validation, provenance checks and an offline deterministic fallback</li>
+                  <li class="done"><span class="m">✓</span>React dashboard: execution graph, blast radius, what-if simulation, verification</li>
+                  <li class="done"><span class="m">✓</span><strong style="color:var(--ink)">335 automated tests passing</strong>, with zero network calls in the suite</li>
+                </ul>
+                <div class="lg-h todo">Not yet</div>
+                <ul>
+                  <li class="pend"><span class="m">○</span>Failure-pattern memory stores and recalls patterns, but doesn't yet feed the protection decision</li>
+                  <li class="pend"><span class="m">○</span>Agent-observer SDK and self-protection / safe-mode remain stubs</li>
+                  <li class="pend"><span class="m">○</span>One attack scenario proven end-to-end; broader detector coverage still to come</li>
+                </ul>
+              </div>
+              <div class="detail-block" style="margin-top:1.3rem"><span class="k">Tech</span>
+                <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">NetworkX</span><span class="chip">Pydantic</span><span class="chip">SQLite</span><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Tailwind</span><span class="chip">Vite</span><span class="chip">pytest</span><span class="chip">LLM integration</span></div>
+              </div>
+              <div class="detail-links">
+                <a class="dlink" href="https://github.com/MatamAkshith/Red_Blue" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>Repository</a>
+              </div>
+              <p class="note">Built for HackWave&nbsp;3.0 as a two-person team. I own the AI investigation layer, impact/blast-radius analysis, the what-if → intervention → re-attack → verification loop, and pattern memory.</p>
+            </div>
+          </div>
+        </div></div></div>
+      </article>
+
+      <!-- 002 CODELENS -->
       <article class="entry rv" data-flag="flagship" data-status="progress" data-cat="ai systems">
         <button class="entry-head" aria-expanded="false" aria-controls="d-codelens">
-          <span class="entry-num">001</span>
+          <span class="entry-num">002</span>
           <span class="entry-main">
             <span class="entry-title">CodeLens AI</span>
             <span class="entry-pos">Developer intelligence for codebases — a system that <em>understands</em> a repository, not a chat wrapper over an LLM.</span>
@@ -244,10 +303,10 @@
         </div></div></div>
       </article>
 
-      <!-- 002 SUSTAINA -->
+      <!-- 003 SUSTAINA -->
       <article class="entry rv" data-flag="flagship" data-status="progress" data-cat="ai ml fullstack systems">
         <button class="entry-head" aria-expanded="false" aria-controls="d-sustaina">
-          <span class="entry-num">002</span>
+          <span class="entry-num">003</span>
           <span class="entry-main">
             <span class="entry-title">SUSTAINA</span>
             <span class="entry-pos">A modular clinic operating system — an evidence-grounded decision-support assistant where the doctor stays the final decision-maker.</span>
@@ -292,10 +351,10 @@
         </div></div></div>
       </article>
 
-      <!-- 003 CAREERLENS -->
+      <!-- 004 CAREERLENS -->
       <article class="entry rv" data-flag="flagship" data-status="shipped" data-cat="ai ml fullstack">
         <button class="entry-head" aria-expanded="false" aria-controls="d-careerlens">
-          <span class="entry-num">003</span>
+          <span class="entry-num">004</span>
           <span class="entry-main">
             <span class="entry-title">CareerLens</span>
             <span class="entry-pos">Turns a résumé into ranked job matches and a prioritized learning roadmap — with every score explainable.</span>
@@ -341,10 +400,10 @@
         </div></div></div>
       </article>
 
-      <!-- 004 FOREST FIRE -->
+      <!-- 005 FOREST FIRE -->
       <article class="entry rv" data-flag="flagship" data-status="shipped" data-cat="ml fullstack">
         <button class="entry-head" aria-expanded="false" aria-controls="d-forest">
-          <span class="entry-num">004</span>
+          <span class="entry-num">005</span>
           <span class="entry-main">
             <span class="entry-title">Forest Fire &amp; Smoke Detection</span>
             <span class="entry-pos">Random-forest wildfire &amp; smoke-risk prediction — taken out of the notebook and into a real serving architecture.</span>
@@ -378,10 +437,10 @@
         </div></div></div>
       </article>
 
-      <!-- 005 ORIGAMI -->
+      <!-- 006 ORIGAMI -->
       <article class="entry rv" data-flag="flagship" data-status="progress" data-cat="ai systems">
         <button class="entry-head" aria-expanded="false" aria-controls="d-origami">
-          <span class="entry-num">005</span>
+          <span class="entry-num">006</span>
           <span class="entry-main">
             <span class="entry-title">ORIGAMI</span>
             <span class="entry-pos">A modular developer operating system — one engine where every capability is a replaceable tool. Designed to extend from software toward physical systems.</span>
@@ -437,10 +496,10 @@
         </div></div></div>
       </article>
 
-      <!-- 006 NEXUS PRO -->
+      <!-- 007 NEXUS PRO -->
       <article class="entry rv" data-flag="flagship" data-status="progress" data-cat="fullstack">
         <button class="entry-head" aria-expanded="false" aria-controls="d-nexus">
-          <span class="entry-num">006</span>
+          <span class="entry-num">007</span>
           <span class="entry-main">
             <span class="entry-title">Nexus Pro</span>
             <span class="entry-pos">Sports-medicine &amp; athlete-health dashboard for anti-doping monitoring — built as an application-layer system.</span>
