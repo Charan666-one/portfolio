@@ -666,3 +666,7 @@ a { color: inherit; text-decoration: none; }
   .ticker-track { animation: none !important; }
   .caret { animation: none !important; }
 }
+
+/* Always-visible quick links for the shipped CareerLens project */
+.entry-quick-links { margin-top: 0; padding: 0 1.25rem 1.1rem; }
+.entry-quick-links .dlink { font-size: .78rem; padding: .45rem .8rem; }
